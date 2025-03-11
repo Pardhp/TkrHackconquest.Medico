@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Medico</title>
+    <link rel="stylesheet" href="medico.css">
+    <link rel="icon" type="image" href="C:\Users\ppard\OneDrive\Pictures\Screenshots\MEDICO.png">   
+</head>
+<body>
+    <div id="loginPage">
+        <img src="C:\Users\ppard\OneDrive\Pictures\Screenshots\MEDICO.png" alt="MEDICO" height="300px" width="350px">
+        <h1></h1>
+        <h1></h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <select id="role">
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+        </select>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="patientDashboard" style="display: none;">
+        <h2>Patient Medical History</h2>
+        <div id="medicalHistory"></div>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="doctorDashboard" style="display: none;">
+        <h2>Doctor Portal</h2>
+        <input type="text" id="searchPatient" placeholder="Search Patient">
+        <button onclick="searchPatient()">Search</button>
+        <button onclick="emergencyAccess()">Emergency</button>
+        <div id="patientInfo"></div>
+        <h3>Add Medical Record</h3>
+        <textarea id="medicalForm" placeholder="Enter medical details..."></textarea>
+        <button onclick="addMedicalRecord()">Submit</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="medico.js"></script>
+</body>
+</html>
