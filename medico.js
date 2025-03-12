@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Initialize sample users if none exist
     if (!localStorage.getItem("users")) {
         localStorage.setItem("users", JSON.stringify([
             { username: "doc1", password: "pass123", role: "doctor" },
@@ -12,6 +11,8 @@ function register() {
     let username = document.getElementById("newUsername").value;
     let password = document.getElementById("newPassword").value;
     let role = document.getElementById("newRole").value;
+
+
 
     if (!username || !password) {
         alert("Please enter a username and password!");
@@ -27,7 +28,7 @@ function register() {
 
     let newUser = { username, password, role };
     if (role === "patient") {
-        newUser.medicalHistory = []; // Ensure patients start with an empty medical history
+        newUser.medicalHistory = []; 
     }
 
     users.push(newUser);
@@ -46,7 +47,7 @@ function login() {
     let user = users.find(u => u.username === username && u.password === password && u.role === role);
 
     if (user) {
-        localStorage.setItem("loggedInUser", JSON.stringify(user)); // Save logged-in user
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
         document.getElementById("loginPage").style.display = "none";
 
         if (role === "doctor") {
@@ -94,15 +95,15 @@ function searchPatient() {
 }
 
 function emergencyAccess() {
+    let patientName = prompt("Enter patient's username to access data:");
     let users = JSON.parse(localStorage.getItem("users"));
-    let patient = users.find(u => u.role === "patient"); // Example: Access first patient
+    let patient = users.find(u => u.username === document.getElementById("searchPatient").value && u.role === "patient");
 
-    if (patient) {
-        document.getElementById("patientInfo").innerHTML = `<p>Emergency Access Granted</p>
-        <p>Patient: ${patient.username}</p>
-        <h3>Basic Data</h3><p>Some emergency info here...</p>`;
+    if (users.find(u => u.username === patientName && u.role === "patient")) {
+        document.getElementById("patientInfo").innerHTML = `<p>Patient: ${(users.find(u => u.username === patientName && u.role === "patient")).username}</p>
+        <h3>Medical History</h3>${(users.find(u => u.username === patientName && u.role === "patient")).medicalHistory.map(record => `<p>${record}</p>`).join("")}`;
     } else {
-        alert("No patients found!");
+        alert("Patient not found!");
     }
 }
 
